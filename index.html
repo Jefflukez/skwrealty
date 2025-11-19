@@ -2,77 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serene Wong | Professional Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Base Colors - Inspired by the reference image */
+        /* Base Colors - 纯色米白调 */
         :root {
-            --bg-color: #f7f3ed; /* Soft, warm beige background */
-            --card-bg: #ffffff; /* White card background */
-            --text-color: #333333; /* Dark gray text */
-            --accent-color: #7b8e72; /* Subtle green/gray accent for links/borders */
-            --hover-bg: #e0dcd4; /* Lighter hover background */
-            --border-color: #d8d3cb; /* Soft border color */
-            --light-text: #888888; /* Lighter text for descriptions */
+            --bg-color: #f7f3ed; /* Soft, warm beige background (纯色) */
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --accent-color: #7b8e72; /* 链接/图标颜色 */
+            --primary-color: #5d5761;
+            --hover-bg: #e0dcd4;
+            --border-color: #d8d3cb;
+            --light-text: #888888;
+            /* Animation timing */
+            --animation-duration: 0.6s;
+            --initial-y: 20px;
         }
 
-        /* General Styles */
+        /* General Styles - 尺寸和居中修正 */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 0;
+            padding: 30px 0; /* 在顶部和底部添加垂直边距，确保内容不贴边 */
+
+            /* **核心居中修正：使用 Flexbox，但让内容自然向下流动** */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* 水平居中 */
+            align-items: flex-start; /* **改为从顶部开始对齐**，解决垂直偏移问题 */
             min-height: 100vh;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* If you have a texture background image, replace the body bg-color and uncomment this: */
-        /*
-        body {
-            background-image: url('YOUR_BACKGROUND_TEXTURE_IMAGE_RAW_URL');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-color: var(--bg-color); // Fallback color
-        }
-        */
+        /* ------------------------------------- */
+        /* ANIMATION STYLES: START (渐次入场动画)*/
+        /* ------------------------------------- */
 
+        .animated-element {
+            opacity: 0;
+            transform: translateY(var(--initial-y));
+            transition: opacity var(--animation-duration) ease-out, transform var(--animation-duration) ease-out;
+        }
+
+        body.loaded .animated-element {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggering Delays */
+        body.loaded .profile-avatar { transition-delay: 0.1s; }
+        body.loaded .name-description { transition-delay: 0.25s; }
+        .link-section a:nth-child(1) { transition-delay: 0.4s; }
+        .link-section a:nth-child(2) { transition-delay: 0.5s; }
+        .link-section a:nth-child(3) { transition-delay: 0.6s; }
+        .link-section a:nth-child(4) { transition-delay: 0.7s; }
+        .link-section a:nth-child(5) { transition-delay: 0.8s; }
+        body.loaded .social-icons { transition-delay: 0.9s; }
+        body.loaded .contact-details { transition-delay: 1.0s; }
+
+        /* ------------------------------------- */
+        /* ANIMATION STYLES: END                 */
+        /* ------------------------------------- */
+
+
+        /* Container (Linktree Card) Styles */
         .container {
-            width: 100%;
-            max-width: 400px; /* Slightly wider container for better feel */
-            margin: 0 auto;
+            width: 90%; /* **调整：在手机上占屏幕宽度的 90%** */
+            max-width: 400px; /* PC/平板上的最大宽度 */
             text-align: center;
+
+            /* **移除绝对定位，让 Flexbox 负责居中** */
             position: relative;
-            background-color: var(--card-bg); /* Main content background */
-            border-radius: 15px; /* Soft rounded corners for the whole content area */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Overall subtle shadow */
-            padding-bottom: 30px; /* Padding for bottom section */
-            overflow: hidden; /* Ensure banner corners are clipped */
+            /* 移除 top/left/transform 属性 */
+
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding-bottom: 30px;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        /* Top Banner Section */
+        /* ... (Banner 样式不变) ... */
         .banner {
             width: 100%;
-            height: 120px; /* Adjust height as needed */
-            background-image: url('https://via.placeholder.com/400x120/d1c7b8/5e5040?text=Your+Banner+Image'); /* Placeholder banner */
+            height: 120px;
+            background-image: url('https://via.placeholder.com/400x120/d1c7b8/5e5040?text=Your+Banner+Image');
             background-size: cover;
             background-position: center;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
             position: relative;
         }
-        /* Optional: Add a subtle overlay to the banner for text clarity */
         .banner::after {
             content: '';
             position: absolute;
@@ -80,43 +108,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.1); /* Slight dark overlay */
+            background-color: rgba(0, 0, 0, 0.1);
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
         }
 
-
-        /* Profile Avatar */
+        /* Profile Avatar (头像) */
         .profile-avatar {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--card-bg); /* White border to separate from banner */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow for avatar */
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             position: absolute;
-            top: 70px; /* Adjust to overlap banner */
+            top: 70px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* 确保头像相对于卡片居中 */
             z-index: 10;
         }
 
-        /* Name and Description */
+        /* Name and Description (花体字) */
         .name-description {
-            margin-top: 60px; /* Space for avatar */
+            margin-top: 60px;
             margin-bottom: 30px;
             color: var(--text-color);
         }
         .name-description h1 {
-            font-family: 'Great Vibes', cursive; /* Elegant script font for name */
+            font-family: 'Great Vibes', cursive; /* 花体字 */
             font-size: 3em;
             margin: 0;
             line-height: 1.2;
-            color: #5d5761; /* Darker, sophisticated name color */
-            /* If 'Serene Wong' is an image, replace h1 with this: */
-            /*
-            <img src="YOUR_SERENE_WONG_IMAGE_RAW_URL" alt="Serene Wong" style="max-width: 80%; height: auto; margin-bottom: 5px;">
-            */
+            color: var(--primary-color);
+            text-align: center;
         }
         .name-description p {
             font-family: 'Poppins', sans-serif;
@@ -135,34 +159,34 @@
             color: var(--text-color);
             text-decoration: none;
             padding: 15px 25px;
-            margin: 15px 25px; /* Horizontal margin for inner spacing */
-            border-radius: 30px; /* Pill/capsule shape */
+            margin: 15px 25px;
+            border-radius: 30px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
             font-size: 1em;
-            display: flex; /* For icon and text alignment */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
         .link-button:hover {
             background-color: var(--hover-bg);
-            transform: translateY(-2px); /* Subtle lift */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
         .link-button i {
             margin-right: 10px;
-            color: var(--accent-color); /* Icon color */
+            color: var(--accent-color);
         }
 
-        /* Contact Icons at the bottom */
+        /* Social/Contact Styles */
         .social-icons {
             margin-top: 40px;
             display: flex;
             justify-content: center;
-            gap: 25px; /* Space between icons */
+            gap: 25px;
         }
         .social-icons a {
             color: var(--accent-color);
@@ -173,8 +197,6 @@
             color: var(--primary-color);
             transform: translateY(-3px);
         }
-
-        /* Footer for contact info */
         .contact-details {
             margin-top: 40px;
             padding: 20px 25px;
@@ -194,46 +216,49 @@
         }
     </style>
 </head>
-<body>
+<body onload="document.body.classList.add('loaded')">
 
     <div class="container">
         <div class="banner">
-            </div>
 
-        <img class="profile-avatar" src="https://raw.githubusercontent.com/Jefflukez/skwrealty/main/serene%20profile.jpg" alt="Serene Wong Profile">
+        </div>
 
-        <div class="name-description">
+        <img class="profile-avatar animated-element" src="https://raw.githubusercontent.com/Jefflukez/serenelinktree/main/serene%20profile.jpg" alt="Serene Wong Profile">
+
+        <div class="name-description animated-element">
             <h1>Serene Wong</h1>
             <p>Real Estate | Food Distribution | Retail</p>
         </div>
 
-        <a href="https://skwrealty.com/" target="_blank" class="link-button">
-            <i class="fas fa-home"></i> SKW Realty
-        </a>
+        <div class="link-section">
+            <a href="https://skwrealty.com/" target="_blank" class="link-button animated-element">
+                <i class="fas fa-home"></i> SKW Realty
+            </a>
 
-        <a href="https://mayfood.com/" target="_blank" class="link-button">
-            <i class="fas fa-pizza-slice"></i> Mayfood Distribution
-        </a>
+            <a href="https://mayfood.com/" target="_blank" class="link-button animated-element">
+                <i class="fas fa-pizza-slice"></i> Mayfood Distribution
+            </a>
 
-        <a href="https://katy-supermarket.ueniweb.com/" target="_blank" class="link-button">
-            <i class="fas fa-shopping-cart"></i> Sun Wing Katy Supermarket
-        </a>
+            <a href="https://katy-supermarket.ueniweb.com/" target="_blank" class="link-button animated-element">
+                <i class="fas fa-shopping-cart"></i> Sun Wing Katy Supermarket
+            </a>
 
-        <a href="https://www.instagram.com/skwtxrealty/" target="_blank" class="link-button">
-            <i class="fab fa-instagram"></i> Instagram
-        </a>
+            <a href="https://www.instagram.com/skwtxrealty/" target="_blank" class="link-button animated-element">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
 
-        <a href="https://www.facebook.com/swong0530" target="_blank" class="link-button">
-            <i class="fab fa-facebook-f"></i> Facebook Page
-        </a>
-
-        <div class="social-icons">
-            <a href="tel:2816365113"><i class="fas fa-phone"></i></a>
-            <a href="mailto:serene.wong@skwrealty.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://www.google.com/maps/search/6650+Corporate+Dr+B,+Houston,+TX+77036" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+            <a href="https://www.facebook.com/swong0530" target="_blank" class="link-button animated-element">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
         </div>
 
-        <div class="contact-details">
+        <div class="social-icons animated-element">
+            <a href="tel:2816365113" title="Phone"><i class="fas fa-phone"></i></a>
+            <a href="mailto:serene.wong@skwrealty.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.google.com/maps/search/6650+Corporate+Dr+B,+Houston,+TX+77036" target="_blank" title="Address"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+
+        <div class="contact-details animated-element">
             <p><strong>Phone:</strong> 281-636-5113</p>
             <p><strong>Email:</strong> serene.wong@skwrealty.com</p>
             <p><strong>Address:</strong> 6650 Corporate Dr B, Houston, TX 77036</p>
@@ -241,10 +266,11 @@
 
     </div>
 
-</body>
-</html></title>
-</head>
-<body>
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
 
 </body>
 </html>
