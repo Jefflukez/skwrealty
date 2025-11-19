@@ -32,10 +32,10 @@
             margin: 0;
             padding: 30px 0; /* 在顶部和底部添加垂直边距，确保内容不贴边 */
 
-            /* **核心居中修正：使用 Flexbox，但让内容自然向下流动** */
+            /* **核心居中修正：使用 Flexbox** */
             display: flex;
             justify-content: center; /* 水平居中 */
-            align-items: flex-start; /* **改为从顶部开始对齐**，解决垂直偏移问题 */
+            align-items: flex-start; /* 从顶部开始对齐，适合手机长内容 */
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -56,16 +56,17 @@
             transform: translateY(0);
         }
 
-        /* Staggering Delays */
+        /* Staggering Delays - 注意：由于移除了一项，延迟时间已调整 */
         body.loaded .profile-avatar { transition-delay: 0.1s; }
         body.loaded .name-description { transition-delay: 0.25s; }
-        .link-section a:nth-child(1) { transition-delay: 0.4s; }
-        .link-section a:nth-child(2) { transition-delay: 0.5s; }
-        .link-section a:nth-child(3) { transition-delay: 0.6s; }
-        .link-section a:nth-child(4) { transition-delay: 0.7s; }
-        .link-section a:nth-child(5) { transition-delay: 0.8s; }
-        body.loaded .social-icons { transition-delay: 0.9s; }
-        body.loaded .contact-details { transition-delay: 1.0s; }
+        .link-section a:nth-child(1) { transition-delay: 0.4s; } /* SKW Realty */
+        .link-section a:nth-child(2) { transition-delay: 0.5s; } /* Mayfood Distribution */
+        /* 原来的第 3 项 (Supermarket) 已删除 */
+        .link-section a:nth-child(3) { transition-delay: 0.6s; } /* Instagram (现在是第 3 项) */
+        .link-section a:nth-child(4) { transition-delay: 0.7s; } /* Facebook (现在是第 4 项) */
+
+        body.loaded .social-icons { transition-delay: 0.8s; } /* 延迟时间前移 */
+        body.loaded .contact-details { transition-delay: 0.9s; } /* 延迟时间前移 */
 
         /* ------------------------------------- */
         /* ANIMATION STYLES: END                 */
@@ -74,13 +75,10 @@
 
         /* Container (Linktree Card) Styles */
         .container {
-            width: 90%; /* **调整：在手机上占屏幕宽度的 90%** */
-            max-width: 400px; /* PC/平板上的最大宽度 */
+            width: 90%;
+            max-width: 400px;
             text-align: center;
-
-            /* **移除绝对定位，让 Flexbox 负责居中** */
             position: relative;
-            /* 移除 top/left/transform 属性 */
 
             background-color: var(--card-bg);
             border-radius: 15px;
@@ -90,7 +88,7 @@
             z-index: 1;
         }
 
-        /* ... (Banner 样式不变) ... */
+        /* ... (Banner 样式保持不变) ... */
         .banner {
             width: 100%;
             height: 120px;
@@ -237,10 +235,6 @@
 
             <a href="https://mayfood.com/" target="_blank" class="link-button animated-element">
                 <i class="fas fa-pizza-slice"></i> Mayfood Distribution
-            </a>
-
-            <a href="https://katy-supermarket.ueniweb.com/" target="_blank" class="link-button animated-element">
-                <i class="fas fa-shopping-cart"></i> Sun Wing Katy Supermarket
             </a>
 
             <a href="https://www.instagram.com/skwtxrealty/" target="_blank" class="link-button animated-element">
