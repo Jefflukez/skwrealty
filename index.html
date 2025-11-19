@@ -1,212 +1,155 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serene Wong | SKW Realty</title>
+    <title>Serene Wong | Link Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* High-End Pale Blue Theme */
+        :root {
+            --bg-color: #e8f4f8; /* Soft Pale Blue Background */
+            --card-bg: #ffffff; /* White Card Background */
+            --text-color: #333333; /* Dark Gray Text */
+            --primary-color: #1e3a8a; /* Deep Blue Accent Color */
+            --hover-bg: #dbeaf3; /* Lighter Hover Background */
+            --border-color: #b3cde0; /* Border Color */
+        }
+
+        /* General Styles - POPPINS is declared as the main font */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif; /* Poppins as the primary text font */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.5s ease;
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
-            color: #333;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* 顶部栏 */
-        .header {
-            background-color: #004d40;
-            color: white;
-            padding: 24px 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2.6em;
-            letter-spacing: 0.05em;
-        }
-        .header p {
-            margin: 6px 0 0;
-            font-size: 1.05em;
-            opacity: 0.85;
-        }
-
-        /* 导航 */
-        .nav {
-            text-align: center;
-            padding: 14px 0;
-            background-color: #ffffff;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .nav a {
-            text-decoration: none;
-            color: #004d40;
-            margin: 0 22px;
-            font-weight: 600;
-            font-size: 1.02em;
-            position: relative;
-            padding-bottom: 4px;
-            transition: color 0.3s ease;
-        }
-        .nav a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: #009688;
-            transition: width 0.3s ease;
-        }
-        .nav a:hover {
-            color: #009688;
-        }
-        .nav a:hover::after {
+        .container {
             width: 100%;
-        }
-
-        /* 区块卡片 + 动画 */
-        .section {
-            padding: 60px 5%;
-            max-width: 1000px;
-            margin: 24px auto 0;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s ease-out forwards;
-        }
-        .section:nth-of-type(2) {
-            animation-delay: 0.1s;
-        }
-        .section:nth-of-type(3) {
-            animation-delay: 0.2s;
-        }
-        .section:nth-of-type(4) {
-            animation-delay: 0.3s;
-        }
-
-        .section:hover {
-            transform: translateY(10px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-            transition: all 0.25s ease-out;
-        }
-
-        .section h2 {
-            border-bottom: 3px solid #009688;
-            padding-bottom: 10px;
-            color: #004d40;
-            margin-top: 0;
-            font-size: 1.6em;
-        }
-
-        .section ul {
-            padding-left: 20px;
-        }
-
-        .section li {
-            margin-bottom: 6px;
-        }
-
-        /* 联系我们 */
-        #contact-us p {
-            font-size: 1.05em;
-        }
-        #contact-us strong {
-            font-weight: 600;
-        }
-
-        /* 页脚 */
-        .footer {
-            background-color: #333;
-            color: white;
+            max-width: 420px;
+            padding: 20px;
             text-align: center;
-            padding: 18px 0;
-            margin-top: 32px;
+        }
+
+        /* Profile Section */
+        .profile h1 {
+            font-family: 'Montserrat', sans-serif; /* Title uses Montserrat */
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        .profile p {
             font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        .profile .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* 简单淡入动画 */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Link Card Styles */
+        .link-card {
+            display: block;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 18px 25px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .link-card:hover {
+            background-color: var(--hover-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
+        .link-card span {
+            font-weight: 700;
+            font-size: 1.2em;
+            font-family: 'Montserrat', sans-serif; /* Link title uses Montserrat */
+            display: block;
+        }
+
+        /* Contact Info Styles */
+        .contact-info {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .contact-info h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .contact-info div {
+            margin-bottom: 10px;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        /* KEY FIX: Apply Poppins specifically to the strong/bold tags */
+        .contact-info div strong {
+            font-family: 'Poppins', sans-serif !important; /* Use !important to override browser default */
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Serene Wong</h1>
-        <p>SKW Realty · Your Trusted Partner in Commercial & Residential Real Estate</p>
-    </div>
+    <div class="container">
+        <div class="profile">
+            <img class="avatar" src="https://raw.githubusercontent.com/Jefflukez/skwrealty/main/serene%20profile.jpg" alt="Serene Wong Profile">
+            <h1>Serene Wong</h1>
+            <p>Real Estate | Food Distribution | Retail</p>
+        </div>
 
-    <div class="nav">
-        <a href="#commercial">Commercial</a>
-        <a href="#residential">Residential</a>
-        <a href="#contact-us">Contact</a>
-    </div>
+        <a href="https://skwrealty.com/" target="_blank" class="link-card">
+            <span>🏡 SKW Realty</span>
+        </a>
 
-    <div id="commercial" class="section">
-        <h2>🏢 Commercial Real Estate</h2>
-        <p>
-            Serene advises owners, investors and occupiers across a full spectrum of commercial assets —
-            from office and retail to industrial and land. Combining in-depth market knowledge with
-            data-driven analysis, she helps clients identify opportunities, mitigate risk and unlock
-            long-term value in every transaction.
-        </p>
-        <ul>
-            <li>Leasing and sales of office and professional buildings</li>
-            <li>Retail site selection and market positioning</li>
-            <li>Industrial, warehouse and land investment advisory</li>
-        </ul>
-    </div>
+        <a href="https://mayfood.com/" target="_blank" class="link-card">
+            <span>🍕 Mayfood Distribution</span>
+        </a>
 
-    <div id="residential" class="section">
-        <h2>🏠 Residential Real Estate</h2>
-        <p>
-            Whether you are searching for your first home, a luxury residence or an income-producing
-            property, Serene provides a highly personalized, concierge-level experience. She takes time
-            to understand your lifestyle, financial objectives and timing, then curates a selection of
-            properties that truly fit — and guides you through each step of the process with clarity and care.
-        </p>
-        <ul>
-            <li>Step-by-step guidance for first-time homebuyers</li>
-            <li>Acquisition and disposition of high-end residential properties</li>
-            <li>Insightful reports on neighborhood and market trends</li>
-        </ul>
-    </div>
+        <a href="https://katy-supermarket.ueniweb.com/" target="_blank" class="link-card">
+            <span>🛒 Sun Wing Katy Supermarket</span>
+        </a>
 
-    <div id="contact-us" class="section">
-        <h2>✉️ Contact Serene</h2>
-        <p>
-            Ready to discuss your next move in real estate? Reach out to Serene for a confidential
-            consultation or to learn more about current opportunities in the Houston market.
-        </p>
-        <p>
-            <strong>Name:</strong> Serene Wong<br>
-            <strong>Company:</strong> SKW Realty<br>
-            <strong>Phone:</strong> <a href="tel:12816365113">281-636-5113</a><br>
-            <strong>Email:</strong> <a href="mailto:serene.wong@skwrealty.com">serene.wong@skwrealty.com</a><br>
-            <strong>Address:</strong> 6650 Corporate Dr Ste B, Houston, TX 77036
-        </p>
-    </div>
+        <a href="https://www.instagram.com/skwtxrealty/" target="_blank" class="link-card">
+            <span>📸 Instagram</span>
+        </a>
 
-    <div class="footer">
-        &copy; 2025 SKW Realty. All Rights Reserved.
-    </div>
+        <a href="https://www.facebook.com/swong0530" target="_blank" class="link-card">
+            <span>🔗 Facebook Page</span>
+        </a>
 
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <div>📞 <strong>Phone:</strong> 281-636-5113</div>
+            <div>📧 <strong>Email:</strong> serene.wong@skwrealty.com</div>
+            <div>📍 <strong>Address:</strong> 6650 Corporate Dr B, Houston, TX 77036</div>
+        </div>
+
+    </div>
 </body>
 </html>
